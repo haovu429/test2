@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ConnectionPool {
-
+    private Connection con;
     private static ConnectionPool pool = null;
     private static DataSource dataSource = null;
 
@@ -35,7 +35,8 @@ public class ConnectionPool {
     public Connection getConnection() {
         try {
             System.out.println("Da chay vao get con");
-            return dataSource.getConnection();
+            con = C3p0DataSource.getConnection("Ket noi pool");
+            return con;
         } catch (SQLException e) {
             System.out.println(e);
             return null;

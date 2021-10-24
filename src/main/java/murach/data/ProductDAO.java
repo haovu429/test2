@@ -1,6 +1,7 @@
 package murach.data;
 
 import murach.business.Product;
+import murach.utils.C3p0DataSource;
 import murach.utils.ConnectionUtils;
 
 import java.sql.Connection;
@@ -22,7 +23,7 @@ public class ProductDAO {
         ArrayList<Product> list = new ArrayList<>();
         String query = "select * from Product";
         try {
-            conn = new ConnectionUtils().getMyConnection();//mo ket noi voi sql
+            conn = C3p0DataSource.getConnection("Ket noi pool");;//mo ket noi voi sql
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {

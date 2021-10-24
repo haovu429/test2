@@ -40,7 +40,7 @@ public class ProductDAO {
         String query = "select * from product where ProductCode = ?";
         List<Product> list = new ArrayList<>();
         try {
-            conn = new ConnectionUtils().getMyConnection();
+            conn = C3p0DataSource.getConnection("Ket noi pool");
             ps = conn.prepareStatement(query);
             ps.setString(1, txt);
             rs = ps.executeQuery();
@@ -58,7 +58,7 @@ public class ProductDAO {
         ArrayList<Product> list = new ArrayList<>();
         String query = "select * from Product where Product.Price >? AND Product.Price<?";
         try {
-            conn = new ConnectionUtils().getMyConnection();//mo ket noi voi sql
+            conn = C3p0DataSource.getConnection("Ket noi pool");//mo ket noi voi sql
             ps = conn.prepareStatement(query);
             ps.setFloat(1, min);
             ps.setFloat(2, max);

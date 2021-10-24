@@ -1,12 +1,14 @@
 package murach.data;
 
+import murach.utils.C3p0DataSource;
+
 import java.sql.*;
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class ConnectionPool {
-
+    private Connection con;
     private static ConnectionPool pool = null;
     private static DataSource dataSource = null;
 
@@ -29,7 +31,8 @@ public class ConnectionPool {
 
     public Connection getConnection() {
         try {
-            return dataSource.getConnection();
+            con = C3p0DataSource.getConnection("Ket noi pool");
+            return con;
         } catch (SQLException e) {
             System.out.println(e);
             return null;
